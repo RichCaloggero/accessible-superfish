@@ -1,0 +1,274 @@
+/* file: physionet.css */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, del, dfn, em, font, img,
+ins, kbd, q, s, samp, small, strike, strong, tt, code, var, b, u, i,
+center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td {
+ margin: 0; padding: 0; font-size: 100%; vertical-align: baseline;  border: 0;
+ outline: 0; background: transparent;
+} /* "code" added to list 24 Nov 2015  - KP */
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+:focus { outline: 0; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+       color: #444; font-size: 100%; background: #fff; margin: 0 1em; }
+a:link, a:visited { color: #369; outline: none; }
+a:hover { color: #39c; }
+
+.hide, .pbanner { display: none; text-align: center; } /* text-align attribute added by KP, 24 Nov 2015 */
+a img { border: none; }
+.group:after { content: "."; display: block; height: 0; clear: both;
+	       visibility: hidden; }
+
+/* work around MSIE bugs */
+* html #selector {
+ filter: progid:DXimageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src='image/image.png'); background-image: none; background-repeat: no-repeat; background-color: transparent; }
+* html .group { height 1%; }
+* html #center_column {background:#fdfde0; width:65%; float:left}
+* html div.fl { width: 45%; float: left; }
+* html div.fr { width: 45%; float: right; }
+* html img { width: 95% }
+* html ul.nav li { list-style: none; margin-top: 0.8em;  margin-left: 2em;
+	    text-indent: -2em; }
+*:first-child+html ul.nav li { list-style: none; margin-top: 0.8em;
+			       margin-left: 2em; text-indent: -2em; }
+*:first-child+html .group { min-height: 1 px; }
+/* end of MSIE bug-fix section */
+
+p { line-height: 1.4; padding: 0.5em; padding-left: 0; margin: 0.25em 0; max-width: 100% } 
+#page > p { margin-top: 1em; } /* added by KP Sept 2015 */
+#page dl, #page ul, #page ol { line-height: 1.4; padding: 0.5em; padding-left: 0; margin: 0.25em 0; max-width: 100% } /* dl, ul, ol added by KP 10 July 2015.  only within page div so as not to mess up superfish menus!  */
+#page .topmenu img { display: none; } /* hide arrows on site map page. KP, 8 Oct 2015 */
+p.plain { margin: 0.25em 1em; }
+p.plain { line-height: 1.4; padding: 0.5em; padding-left: 0; margin: 0.25em 1em; max-width: 100% } /* added (to change previous line) by KP 29 Sept 2015 */
+ul, ol {padding-bottom: .5em; padding-top: .5em; margin-bottom: .25em; } /*added by KP 29 June 2015 */
+
+h1, h2, h3 { font-variant: small-caps; color: #080; background: #beb;
+    	     padding: .2em 1em; margin: 0 -1em; clear: both; } /* clear: both added by KP 9 June 2015 */
+h2, h3 { margin-top: .75em;} /* added by KP 29 June 2015 */
+h1, h2, h3, h4, h5, h6 { font-family: Georgia, Times, serif; }
+h1 { font-size: 1.75em; text-align: center; padding-top: .4em;} /* padding-top added by KP 10 July 2015 - avoid collision with top banner */
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1em; font-variant: small-caps; }
+
+h1 tt, h2 tt, h3 tt { font-family: courier, monospace; font-variant: normal; }
+h1 code, h2 code, h3 code { font-family: courier, monospace; font-variant: normal; } /* tt is deprecated; use code instead */
+ /* blockquote is for the quotation, not the source. use class reference instead. KP 7/2015 */
+blockquote { line-height: 1.2; padding: 0.5em; padding-left: 3em; padding-right: 3em }
+.reference { line-height: 1.2;  padding: 0 3em .5em 3em; }
+/* */
+img { max-width: 100%; }
+div > img { padding: 0.5em 1em 0em; }
+li { margin-left: 1em; margin-bottom: 0.3em; text-indent: 0; }
+ul > li { list-style: disc outside; }
+ol > li { list-style: decimal outside; }
+ol.a > li { list-style: lower-alpha; }
+dt { font-weight: bold; text-indent: 1em; }
+dd { margin: 0 0 0 4em; }
+/*tt { font-size: .83em; } */
+tt, code { font-size: 1.2em; }  /* changed by KP 6/2015 */
+/* pre { background: #ffe; font-size: .83em; margin: 0 2em; display: block;
+      border: 1px dotted; text-indent: 0; padding: 0.25em 1.5em; }*/
+pre { background: #ffe; font-size: 1em; margin: 2em; display: block;
+      border: 1px dotted; text-indent: 0; padding: 0.75em 1.5em; } /*changed by KP 6/2015 */
+.pseudopre { font-family: monospace; background: #ffe; font-size: 1em; margin: 2em; display: block;
+      border: 1px dotted; text-indent: 0; padding: 0.75em 1.5em; } /*changed by KP 6/2015 */
+li > pre { margin: 0.5em 2em 0 1em; }
+pre.code { background: #eee; }
+small { font-size: .83em; }
+td { padding-bottom: 0.75em; padding-left: 0.5em; padding-right: 0.5em }
+td img { vertical-align: text-top; }
+.breadcrumbs { float: left; padding: 0.25em; margin: 0.6em; background: #fff; } /* added by KP 7/2015 */
+
+/* styles for forms, added by KP 12/2015  */
+label { font-weight: normal;  padding: .4em .8em .2em 0; display: inline-block; min-width: 40%; text-align: right; }
+fieldset { border: none; padding: 1em 0 1.5em 0; }
+
+a[href^='https://'],
+a[href^='http://'] { background: url(/icons/External.png) no-repeat center
+		     right; padding-right: 1em; }
+a.plain,
+a[href^='https://physionet'],
+a[href^='http://physionet'],
+a[href^='http://www.physionet.org'] { background: none; padding-right: 0; }
+a[href^='mailto:'] { background: url(/icons/Email.png) no-repeat left center;
+		     padding-left: 1.25em; margin-left: 0.25em; }
+a[href^='#top'] { border-style: solid; border-width: thin; border-color: #694;
+		  border-radius: 5px; color: #fff; background: #7c7; background: #694;
+		  text-decoration: none; padding: 1px; padding: .2em .4em; font-size: .9em;} /* changed by KP 10/2015 */
+a[href^='#top']:active { border-width: medium; }
+a[href^='#top']:hover { color: #694; background: #fff; }  /* changed by KP 10/2015 */
+a[name] { padding-top: 1em; }
+/* :target { border-top: 2em solid #fff; margin-top: -2em;} */ /* commented out by KP 21 Aug 2015 -- does strange things */
+:target {border-top: 2em solid transparent; background-clip: padding-box; margin-top: -2em;} /* so that anchored headers will appear under top banner */
+.feed li { list-style: none; }
+/*** menu styles ***/
+.menu, .menu ul, .menu li { list-style-type: none; padding: 0; margin: 0; }
+.menu { position: relative; }
+* html .menu { position: static; }
+.menu li { float: left; background: #dfd; width: 12em; height: 1.5em;
+          margin: 0 0.125em 0 0; border: 3px solid #ddd; border-style: outset;
+	    padding: 0 0 0 0; }
+.menu .pb, .menu .pb li { background: #ddf; }
+.menu .pt, .menu .pt li { background: #fbb; }
+.menu .pw, .menu .pw li { background: #ffb; }
+.menu table { border-collapse: collapse; width: 0; height: 0;
+             position: absolute; top: 0; left: 0; font-size: 1em; }
+.menu li a { display: block; color: #444;
+             font-size: 100%; line-height: 1.5em; width: 12em;
+	          text-decoration: none; text-align: right; border-style: outset; }
+.menu :hover,
+.menu :focus { color: #fff; background: #aaa; }
+.menu li:hover,
+.menu li:focus,
+.menu li a:hover
+.menu li a:focus { position: relative; border-style: inset; }
+.menu :hover > a,
+.menu :focus > a { color: #fff; background: #aaa; }
+.menu ul,
+.menu :hover ul ul,
+.menu :focus ul ul,
+.menu :hover ul :hover ul ul,
+.menu :focus ul :focus ul ul,
+.menu :hover ul :hover ul :hover ul ul,
+.menu :focus ul :focus ul :focus ul ul 
+{ position: absolute; left: -999em; width: 12em; }
+.menu :hover ul,
+.menu :focus ul { left: -1px; top: 1.5em; background: transparent
+       url(transparent.gif); padding-top: 0.5em; }
+.menu :hover ul :hover ul,
+.menu :focus ul :focus ul,
+.menu :hover ul :hover ul :hover ul,
+.menu :focus ul :focus ul :focus ul,
+.menu :hover ul :hover ul :hover ul :hover ul,
+.menu :focus ul :focus ul :focus ul :focus ul
+ { padding: 0.5em 0.2em; left: 12.1em; top: -0.5em; }
+
+
+
+/*** sf menu styles ***/
+.sf-menu, .sf-menu ul, .sf-menu li { list-style-type: none; padding: 0; margin: 0; }
+.sf-menu { position: relative; }
+* html .sf-menu { position: static; }
+.sf-menu li { float: left; background: #dfd; width: 12em; height: 1.5em;
+          margin: 0 0.125em 0 0; border: 3px solid #ddd; border-style: outset;
+	  padding: 0; }
+.sf-menu .pb, .sf-menu .pb li { background: #ddf; }
+.sf-menu .pt, .sf-menu .pt li { background: #fbb; }
+.sf-menu .pw, .sf-menu .pw li { background: #ffb; }
+.sf-menu table { border-collapse: collapse; width: 0; height: 0;
+             position: absolute; top: 0; left: 0; font-size: 1em; }
+.sf-menu li a { display: block; color: #444;
+             font-size: 100%; line-height: 1.5em; width: 12em;
+	     text-decoration: none; text-align: right; border-style: outset; }
+.sf-menu :hover,
+.sf-menu :focus { color: #000; background: #fff; }
+.sf-menu li:hover,
+.sf-menu li:focus,
+.sf-menu li a:hover
+.sf-menu li a:focus { position: relative; border-style: inset; }
+.sf-menu :hover > a,
+.sf-menu :focus > a { color: #000; background: #fff; }
+.sf-menu ul,
+.sf-menu :hover ul ul,
+.sf-menu :focus ul ul,
+.sf-menu :hover ul :hover ul ul,
+.sf-menu :focus ul :focus ul ul,
+.sf-menu :hover ul :hover ul :hover ul ul,
+.sf-menu :focus ul :focus ul :focus ul ul { position: absolute; display: none; width: 12em; }
+.sf-menu :hover ul,
+.sf-menu :focus ul { left: -1px; background: transparent url(transparent.gif);  padding-top: 0.5em; }
+.sf-menu :hover ul :hover ul,
+.sf-menu :focus ul :focus ul,
+.sf-menu :hover ul :hover ul :hover ul,
+.sf-menu :focus ul :focus ul :focus ul,
+.sf-menu :hover ul :hover ul :hover ul :hover ul,
+.sf-menu :focus ul :focus ul :focus ul :focus ul
+ { padding: 0.5em 0.2em; left: 12.1em; display: block; }
+ul.sf-menu ul.pntop { margin: -1em 0 }
+/****** end sf menu styles ***/
+
+div.notice { width: 90%; margin: 2em auto; margin-bottom: 2em; padding: 2em; background: #cdf; } /*margin top and bottom adjusted  by KP 6/2015*/
+div.figure { width: 90%; margin: auto; padding: 2em; border: 1px dotted; }
+tr.ne { vertical-align: top; }
+td.nd { white-space: nowrap; text-align: right; }
+/* above styles on news.shtml page supplanted by those below. KP 8 Oct 2015 */
+dt.nd { padding-top: .75em; }
+td p { padding: 0; margin: 0; }
+td.si { color: #fff; background: #a44; font-weight: bold; padding: 0;
+	text-align:center; vertical-align: middle; }
+p.pr { margin: 0 0 0 1em; text-indent: -1em }
+p.prc { margin: 0.5em 0 0 1em; text-indent:-1em }
+table.pnw { background: #ffffff; outline: 1px solid #a0a0a0; padding: 5px;
+	    border: 3px solid #d0d0d0; }
+table.acc { background: #ffffe0; outline: 1px solid #a0a0a0; padding: 5px;
+	    border: 5px solid #ddddaa; }
+input.red { -webkit-border-radius: 5px; -moz-border-radius: 5px;
+	    border-radius: 5px; border: 1px solid gray; padding:1px 8px;
+	    display:inline-block; text-decoration:none; background:#c02020;
+	    color:#ffffff; cursor:pointer; font: 14px sans-serif; }
+input.red:hover { text-decoration: none; background: #ff4040; cursor: pointer;
+		  border: 1px solid #ff0000; }
+a.button { -webkit-border-radius: 5px; -moz-border-radius: 5px;
+	    border-radius: 5px; border: 1px solid gray; padding:1px 8px;
+	    display:inline-block; text-decoration:none; background:#f0f0f0;
+	    color:#444; cursor:pointer;
+	    font: 14px sans-serif; font-size: .83em; }
+
+ /* login styles added by KP, 29 Oct 2015 */
+div.login { width: 60%;  padding: 1em 1.5em; background: <!--#echo var=CLIGHT -->; border: solid 2px <!--#echo var=CDARK -->; margin: 1.75em auto 1em auto; border-radius: 5px; border-radius: 10px; display: block; font-size: .9em;}
+div.login input { color: #000; margin: 0 .5em .5em .5em;}
+
+/* superfish essential styles */
+.sf-menu, .sf-menu * { margin: 0; padding: 0; list-style: none; }
+.sf-menu { line-height:	0.8em; }
+.sf-menu ul { position:	absolute; display: none; width: 12em; }
+.sf-menu ul li { width:	100%; }
+.sf-menu li:hover { visibility:	inherit; } /* fixes IE7 'sticky bug' */
+.sf-menu li { float: left; position: relative; }
+.sf-menu a { display: block; position: relative; }
+.sf-menu li:hover ul, .sf-menu li.sfHover ul {
+	  display: block; left: 0; top: 2.25em; z-index: 99; }
+ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul,
+ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul { display: none; }
+ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul,
+ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
+	  left: 12em; display: block; top: -0.75em; }
+
+/* table of contents */
+/* #toc { float: right; font-size: 10pt; width: 200px;
+       padding: 10px 10px 10px 20px; background: #efffb1; 
+       border: solid 1px #ccd136; margin: 0 -1em 10px 15px; border-radius: 5px; }
+*/
+/* adjust toc color to coordinate with header colors -- done in /head.shtml */
+#toc { float: right; font-size: 10pt; max-width: 16em; width: 10em;
+       padding: 1em 1.5em; margin: 0 .2em 1em 1em; border-radius: 5px; border-radius: 10px;} /* overrides */
+#toc:before {
+    content: "On this page:";
+}
+#toc li:first-child {
+    margin-top: .5em;
+}
+#toc li ul {
+    padding: .2em;
+}
+#toc li ul li:first-child {
+    margin-top: .1em;
+}
+#toc a {
+    text-decoration: none;
+}
+/***/
+/* styles for quick links, news, and the like */
+.quicklinks {
+    background: #f5fcf3; border: 2px solid #694; border-radius: 10px; margin: 0px 0.2em .75em 1em;
+}
+
+.quicklinks .header {
+    border-radius: 10px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; font-size: 1.25em; font-variant: small-caps; color: #694; background: #ceb;  font-weight: bold; padding: 10px; font-family: Georgia, Times, serif; margin: 0;
+}
+

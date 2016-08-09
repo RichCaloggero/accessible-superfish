@@ -1,5 +1,7 @@
 /* makeAccessible
-  arguments: options, or container, name, and options
+  arguments:
+ options,
+ or container, name, options
   ** Note: container should be the top "ul" element in the list structure
 
   This function adds aria tree markup to the superfish menu structure, as well as keyboard navigation.
@@ -7,12 +9,24 @@
   - open: called when a node is opened with node as argument;
   - close: called when a node is closed, with node as an argument
   - beforeOpen: called before open with node as an argument
-  **  note: if open and close functions are not supplied, this function will have no effect; the open and close functions should generally show / hide nodes, respectively.
+  - role_root: role of root element (default: "tree")
+  - role_group: role of grouping element (default: "group")
+  - role_item: role of branch (default: "treeitem")
+  - state_expanded: indicates expanded branch (default: "aria-expanded")
+
+***  note: if open and close functions are not supplied, this function will have no effect; the open and close functions should generally show / hide nodes, respectively.
 */
 
-
 function makeAccessible ($container, name) {
-var options = {open: function(){}, close: function(){}};
+// defaults
+var options = {
+open: function(){}, close: function(){},
+role_root: "tree",
+role_group: "group",
+role_item: "treeitem",
+state_expanded: "aria-expanded"
+}; // defaults
+
 if (arguments.length == 1) {
 options = $.extend (options, arguments[0]);
 } else if (arguments.length == 2) {
@@ -31,31 +45,34 @@ function addAria ($container) {
 Keyboard-navigable JavaScript widgets - Accessibility | MDN
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 */
-
+var $ul;
+var $hasChildren, $li;
 
 // remove all implicit keyboard focus handlers (i.e. links and buttons should not be tabbable here since we're using aria-activedescendant to manage focus)
 $("a, button", $container).attr ("tabindex", "-1");
 //debug ("- implicit keyboard handling removed");
 
 // "ul" requires role="group"
-var $ul = $("ul", $container).addBack().attr ("role", "group");
+$ul = $("ul", $container).addBack()
+.attr ("role", options.role_group);
 
 // "li" are tree nodes and require role="treeitem"
-$("li", $ul).attr ({"role": "treeitem"}); 
+$li = $("li", $ul)
+.attr ({role: options.role_item}); 
 
 // add aria-expanded to nodes only if they are not leaf nodes
-$("[role=treeitem]", $ul).has("[role=group]")
-.attr ("aria-expanded", "false");
+$hasChildren = $li.has("ul");
+$hasChildren.attr (options.state_expanded, "false");
 
 // unhide the top-level nodes and tell the container that the first node should have focus
-$ul.first().find("[role=treeitem]").first()
+$ul.first().find("li").first()
 //.show ()
 .attr ({"id": activeDescendant_id});
 
 // replace role="group" with role="tree" on the first group and cause the tree to look for our currently active node
 $ul.first()
 .attr({
-"role": "tree",
+"role": options.role_root,
 "tabindex": "0",
 "aria-activedescendant": activeDescendant_id
 }).focus();
@@ -95,7 +112,7 @@ return true;
 // add code to "open()" and "close()" functions to integrate with current implementation
 function navigate ($start, key) {
 //debugNode ($start, "navigate: ");
-if (! $start || $start.length == 0) return null;
+if (! isValidNode($start)) return null;
 
 switch (key) {
 case 38: return previous (); // upArrow moves to previous sibling
@@ -118,37 +135,37 @@ default: return null;
 } // switch
 
 function isOpened () {
-return $start && $start.length == 1 && $start.attr("aria-expanded") == "true";
+return $start && $start.length == 1 && $start.attr(options.state_expanded) == "true";
 } // isOpened
 
 function open () {
-if ($start && $start.length == 1 && $start.is("[aria-expanded=false]")) {
-$start.attr ("aria-expanded", "true");
+if (!isOpened()) {
+$start.attr (options.state_expanded, "true");
 if (options.open && options.open instanceof Function) options.open ($start);
 } // if
 } // open
 
 function close () {
-if ($start && $start.length == 1 && $start.is("[aria-expanded=true]")) {
-$start.attr ("aria-expanded", "false");
+if (isOpened()) {
+$start.attr (options.state_expanded, "false");
 if (options.close && options.close instanceof Function) options.close($start);
 } // if
 } // close
 
 function next () {
-return $start.next ("[role=treeitem]");
+return $start.next ("[role=" + options.role_item + "]");
 } // next
 
 function previous () {
-return $start.prev("[role=treeitem]");
+return $start.prev("[role=" + options.role_item + "]");
 } // previous
 
 function up () {
-return $start.parent().closest("[role=treeitem]");
+return $start.parent().closest("[role=" + options.role_item + "]");
 } // up
 
 function down () {
-return $start.find("[role=treeitem]:first");
+return $start.find("[role=" + options.role_item + "]:first");
 } // down
 
 } // navigate

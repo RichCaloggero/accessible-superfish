@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accessible jQuery Superfish dropdown menu -- data import</title>
+<link rel="stylesheet" href="css/superfish.css" media="screen">
+<style> body { max-width: 40em; } </style>
+<script src="jquery.min.js"></script>
+<script src="hoverIntent.js"></script>
+<script src="superfish.min.js"></script>
+
+<script src="debug.js"></script>
+<script src="import.js"></script>
+<script src="accessible-superfish.js"></script>
+
+<script>
+$(document).ready(function(){
+debug ("--start--");
+
+// import data
+jQuery.ajax({url: "data.txt", dataType: "text"})
+.fail (function (error) {alert (JSON.stringify(error));})
+.done (function (data) {
+var html, tree, $example;
+
+//debug ("text: ", data);
+tree = importTreeData (data);
+debug ("tree: ", tree);
+
+html = tree2html (tree);
+debug ("html: ", html);
+
+$("#example-wrapper").html (html);
+debug ("html added");
+
+$("#example-wrapper > ul")
+.attr ("id", "example")
+.addClass ("sf-menu");
+
+// initialise plugin
+$example = $('#example').superfish({
+//add options here if required
+});
+
+makeAccessible ($example, "a11y-", {
+open: function ($node) {
+$node
+.superfish("show");
+}, // open
+
+afterOpen: function ($node) {
+}, // afterOpen
+
+close: function ($node) {
+$node
+.superfish("hide");
+} // close
+
+}); // makeAccessible
+
+}); // ajax
+
+}); // ready
+
+
+
+//alert ("loaded");
+</script>
+</head>
+<body>
+<div id="example-wrapper">
+</div>
+
+<main>
+<p>This is placeholder text...</p>
+</main>
+
+<div id="debug" aria-live="polite">
+</div>
+
+</body>
+</html>

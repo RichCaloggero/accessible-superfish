@@ -1,0 +1,12 @@
+Chemistry
+1 inorganic
+1 organic chemistry 1
+2 molecular biology 1
+2 organic chemistry 2
+3 molecular biology 2
+
+Biology
+1 basic lab
+1 molecular biology 1
+2 molecular biology 2
+

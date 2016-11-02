@@ -21,12 +21,9 @@ function makeAccessible ($container, name) {
 // defaults
 var options = {
 open: function(){}, close: function(){},
-select: function () {},
-
+role_root: "tree",
 role_group: "group",
 role_item: "treeitem",
-ul: "ul",
-li: "li",
 state_expanded: "aria-expanded"
 }; // defaults
 
@@ -56,11 +53,11 @@ $("a, button", $container).attr ("tabindex", "-1");
 //debug ("- implicit keyboard handling removed");
 
 // "ul" requires role="group"
-$ul = $(options.ul, $container).addBack()
+$ul = $("ul", $container).addBack()
 .attr ("role", options.role_group);
 
 // "li" are tree nodes and require role="treeitem"
-$li = $(options.li, $ul)
+$li = $("li", $ul)
 .attr ({role: options.role_item}); 
 
 // add aria-expanded to nodes only if they are not leaf nodes
@@ -68,7 +65,7 @@ $hasChildren = $li.has("ul");
 $hasChildren.attr (options.state_expanded, "false");
 
 // unhide the top-level nodes and tell the container that the first node should have focus
-$ul.first().find(options.li).first()
+$ul.first().find("li").first()
 //.show ()
 .attr ({"id": activeDescendant_id});
 
@@ -79,9 +76,6 @@ $ul.first()
 "tabindex": "0",
 "aria-activedescendant": activeDescendant_id
 }).focus();
-
-// execute select callback
-options.select ($container.find("#" + activeDescendant_id));
 
 return $container;
 } // addAria
@@ -101,13 +95,10 @@ if (key >= 35 && key <= 40) {
 //debug ("key: " + key);
 $newNode = navigate (getCurrentNode(), key);
 
-if (isValidNode($newNode)) {
+if (isValidNode($newNode) && $newNode !== $currentNode) {
 //debugNode ($newNode, "navigate: ");
-if ($newNode !== $currentNode) {
-if (  options.leaveNode && options.leaveNode instanceof Function) options.leaveNode ($currentNode, $newNode);
-if (  options.select && options.select instanceof Function) options.select ($newNode);
+if (options.leaveNode && options.leaveNode instanceof Function) options.leaveNode ($currentNode, $newNode);
 setCurrentNode ($newNode);
-} // if
 } // if
 return false;
 } // if

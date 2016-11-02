@@ -17,7 +17,7 @@ $(document).ready(function(){
 debug ("--start--");
 
 // import data
-var import_treeData = jQuery.ajax({url: "data.txt", dataType: "text"})
+var import_treeData = jQuery.ajax({url: "wcag-data.txt", dataType: "text"})
 .fail (function (error) {alert (JSON.stringify(error));})
 .done (function (data) {
 var html, tree, $menu;
@@ -42,7 +42,7 @@ $menu = $('#menu').superfish({
 });
 
 makeAccessible ($menu, "a11y-", {
-select: function ($node) {
+currentNode: function ($node) {
 $node.trigger ("selectNode");
 },
 

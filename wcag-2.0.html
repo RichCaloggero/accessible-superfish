@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <title>Accessible jQuery Superfish dropdown menu -- data import</title>
 <link rel="stylesheet" href="css/superfish.css" media="screen">
-<style> body { max-width: 40em; } </style>
 <script src="jquery.min.js"></script>
 <script src="hoverIntent.js"></script>
 <script src="superfish.min.js"></script>
@@ -21,7 +20,7 @@ debug ("--start--");
 var import_treeData = jQuery.ajax({url: "data.txt", dataType: "text"})
 .fail (function (error) {alert (JSON.stringify(error));})
 .done (function (data) {
-var html, tree, $example;
+var html, tree, $menu;
 
 //debug ("text: ", data);
 tree = importTreeData (data);
@@ -30,19 +29,19 @@ tree = importTreeData (data);
 html = tree2html (tree);
 //debug ("html: ", html);
 
-$("#example-wrapper").html (html);
+$("#menu-container").html (html);
 debug ("html added");
 
-$("#example-wrapper > ul")
-.attr ("id", "example")
+$("#menu-container > ul")
+.attr ("id", "menu")
 .addClass ("sf-menu");
 
 // initialise plugin
-$example = $('#example').superfish({
+$menu = $('#menu').superfish({
 //add options here if required
 });
 
-makeAccessible ($example, "a11y-", {
+makeAccessible ($menu, "a11y-", {
 select: function ($node) {
 $node.trigger ("selectNode");
 },
@@ -78,11 +77,11 @@ $.when (import_treeData, import_wcagData)
 var selectors = [
 [".div2", ".principle"],
 [".div3", ".guideline :header:first"],
-[".sc", ".scinner .sctxt"]
+[".sc", ".scinner"]
 ];
 var $wcag = $('<div class="document" id="wcag-2.0"></div>').append (wcagData);
 var $guidelines = $wcag.find (".body .div1:first");
-var $tree = $("#example");
+var $tree = $("#menu");
 var loc, text;
 
 loc = location($tree, getSelectedNode($tree));
@@ -128,7 +127,7 @@ $nodes = $node.find (selector[0]);
 $node = $nodes.eq(index);
 } // for
 
-return $node.find (selector[1]).text();
+return $node.find (selector[1]).html();
 } // extractText
 
 function getSelectedNode ($tree) {
@@ -140,8 +139,7 @@ return $("#" + id, $tree);
 
 function display (text) {
 setTimeout (function () {
-$("#text").html ("")
-.append (document.createTextNode(text));
+$("#text").html (text)
 }, 200);
 } // display
 
@@ -153,7 +151,7 @@ $("#text").html ("")
 </script>
 </head>
 <body>
-<div id="example-wrapper">
+<div id="menu-container">
 </div>
 
 <main>

@@ -138,10 +138,23 @@ return $("#" + id, $tree);
 
 
 function display (text) {
+var $tree = $("#menu");
+var loc = location($tree, getSelectedNode($tree));
+
+if (loc.length-1 >= getVerbosity()) {
+$("#text").attr ("aria-live", "polite");
+} else {
+$("#text").attr ("aria-live", "off");
+} // if
+
 setTimeout (function () {
 $("#text").html (text)
 }, 200);
 } // display
+
+function getVerbosity () {
+return $("#verbosity").val();
+} // getVerbosity
 
 }); // ready
 
@@ -156,6 +169,13 @@ $("#text").html (text)
 </div>
 
 <main>
+<label>Verbosity:
+<select id="verbosity">
+<option value="0">Principles</option>
+<option value="1">Guidelines</option>
+<option selected value="2">Criteria</option>
+</select>
+</label>
 <div id="text" aria-live="polite">
 </div>
 </main>
